@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Pose Studio</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8.3/dist/teachablemachine-pose.min.js"></script>
+  <script defer src="./app.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Vision / Pose classification</p>
+        <h1>Pose Studio</h1>
+        <p class="subtitle">Live body tracking and class confidence</p>
+      </div>
+      <div id="status" class="connection" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-text">STARTING</span>
+      </div>
+    </header>
+
+    <section class="workspace" aria-label="Live pose detection">
+      <div class="camera-panel surface">
+        <div class="stage" id="stage">
+          <div id="webcam-container"></div>
+          <canvas id="skeleton-canvas" aria-label="Pose skeleton overlay"></canvas>
+          <div class="stage-tools">
+            <span class="tool-chip" id="fps">-- FPS</span>
+            <div class="tool-actions">
+              <button class="toggle-button" id="sound-toggle" type="button" aria-pressed="false">Sound: Off</button>
+              <button class="toggle-button" id="skeleton-toggle" type="button" aria-pressed="true">Skeleton: On</button>
+            </div>
+          </div>
+          <div class="loading-overlay" id="loading">
+            <div class="spinner" aria-hidden="true"></div>
+            <span id="loading-message">Loading pose model and camera...</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="results-panel surface" aria-labelledby="results-title">
+        <div class="panel-heading">
+          <h2 id="results-title">Class confidence</h2>
+          <span class="class-count" id="class-count">-- classes</span>
+        </div>
+        <div id="label-container" aria-live="polite"></div>
+        <p class="hint">The highest confidence class is highlighted as the camera updates.</p>
+      </section>
+    </section>
+  </main>
+
+  <audio id="rene-audio" src="./mama-by-rene.mp3" preload="auto"></audio>
+
+</body>
+</html>
